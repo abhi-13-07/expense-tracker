@@ -3,7 +3,7 @@ import { TransactionContext } from '../Context/TransactionProvider';
 
 const AddTransactions = () => {
 	const [transaction, setTransaction] = useState({ comment: '', ammount: '' });
-	const [, setTransactions] = useContext(TransactionContext);
+	const [, dispatch] = useContext(TransactionContext);
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
@@ -16,7 +16,7 @@ const AddTransactions = () => {
 				transaction.type = 'expense';
 			}
 
-			setTransactions((prevTransactions) => [...prevTransactions, transaction]);
+			dispatch({ type: 'Add', payload: { newTransaction: transaction } });
 			setTransaction({ comment: '', ammount: '' });
 		} else {
 			console.log('Need to enter both fields');
